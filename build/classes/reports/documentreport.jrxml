@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dayfollowup" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="73fffd13-e2c6-402c-a657-9cc81f51d89f">
+	<property name="ireport.zoom" value="1.100000000000002"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="dataset1" uuid="cf661ca1-28b3-4ae2-8e57-aaa11edc0f08">
+		<parameter name="d_serial" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select * from clinic.operation where d_serial = $P{d_serial}]]>
+		</queryString>
+		<field name="id" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="p_serial" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="d_serial" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="name" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="date" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="fulldate" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="type" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="price" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="doctor" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="remark" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+	</subDataset>
+	<subDataset name="dataset1_1" uuid="6a4054f0-97be-480e-8d99-44874cdd1a55">
+		<parameter name="d_serial" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select * from clinic.operation where d_serial = $P{d_serial}]]>
+		</queryString>
+		<field name="id" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="p_serial" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="d_serial" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="name" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="date" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="fulldate" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="type" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="price" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="doctor" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="remark" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+	</subDataset>
+	<parameter name="serial" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select distinct
+ pat.name patient_name,pat.doctor patient_doctor,pat.dob patient_dob
+ ,doc.serial doc_serial, doc.pressure doc_pressure, doc.weight doc_weight, doc.sugar doc_sugar, doc.remark doc_remark, doc.date doc_date , doc.doctor_name doc_name
+, drugs.name drug_name, drugs.typee drug_type, drugs.number drug_number
+ from clinic.documents doc
+ left outer join clinic.drugs drugs on drugs.d_serial = doc.serial
+ left outer join clinic.patient pat on pat.serial = doc.p_serial
+ where
+ doc.serial =$P{serial}
+order by doc.serial desc]]>
+	</queryString>
+	<field name="patient_name" class="java.lang.String"/>
+	<field name="patient_doctor" class="java.lang.String"/>
+	<field name="patient_dob" class="java.lang.String"/>
+	<field name="doc_serial" class="java.lang.String"/>
+	<field name="doc_pressure" class="java.lang.String"/>
+	<field name="doc_weight" class="java.lang.String"/>
+	<field name="doc_sugar" class="java.lang.String"/>
+	<field name="doc_remark" class="java.lang.String"/>
+	<field name="doc_date" class="java.lang.String"/>
+	<field name="doc_name" class="java.lang.String"/>
+	<field name="drug_name" class="java.lang.String"/>
+	<field name="drug_type" class="java.lang.String"/>
+	<field name="drug_number" class="java.lang.String"/>
+	<group name="DOC" keepTogether="true">
+		<groupExpression><![CDATA[$F{doc_serial}]]></groupExpression>
+		<groupHeader>
+			<band height="118">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement uuid="4f5ee584-4a65-47f0-84f4-31e8e66ec33d" x="8" y="36" width="213" height="29" forecolor="#000000"/>
+					<box leftPadding="0">
+						<topPen lineWidth="0.0" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineColor="#000000"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="18" isBold="true" isItalic="true" isUnderline="true" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+						<paragraph rightIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["* Medicines"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="c40baa6b-e0a1-4324-8dd5-830e35fdc1eb" mode="Opaque" x="8" y="89" width="250" height="29" forecolor="#000000" backcolor="#E6E6E6"/>
+					<box leftPadding="0">
+						<pen lineColor="#006666"/>
+						<topPen lineWidth="1.0" lineColor="#006666"/>
+						<leftPen lineWidth="1.0" lineColor="#006666"/>
+						<bottomPen lineWidth="1.0" lineColor="#006666"/>
+						<rightPen lineWidth="1.0" lineColor="#006666"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="16" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Name]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="fb9a3fb7-b00c-4350-a7ba-fad06f9ca7b3" mode="Opaque" x="258" y="89" width="210" height="29" forecolor="#000000" backcolor="#E6E6E6"/>
+					<box leftPadding="0">
+						<pen lineColor="#006666"/>
+						<topPen lineWidth="1.0" lineColor="#006666"/>
+						<leftPen lineWidth="1.0" lineColor="#006666"/>
+						<bottomPen lineWidth="1.0" lineColor="#006666"/>
+						<rightPen lineWidth="1.0" lineColor="#006666"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="16" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Dose]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="ee7edd31-650b-4f1f-bf16-f92cb90f7372" mode="Opaque" x="468" y="89" width="75" height="29" forecolor="#000000" backcolor="#E6E6E6"/>
+					<box leftPadding="0">
+						<pen lineColor="#006666"/>
+						<topPen lineWidth="1.0" lineColor="#006666"/>
+						<leftPen lineWidth="1.0" lineColor="#006666"/>
+						<bottomPen lineWidth="1.0" lineColor="#006666"/>
+						<rightPen lineWidth="1.0" lineColor="#006666"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="16" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Number]]></text>
+				</staticText>
+				<line>
+					<reportElement uuid="5baf6162-9e42-4a17-b5d4-78ac83ff6220" x="0" y="8" width="555" height="1" forecolor="#000000"/>
+					<graphicElement>
+						<pen lineWidth="2.0"/>
+					</graphicElement>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="119">
+				<componentElement>
+					<reportElement uuid="140d8323-38a7-4869-b85c-fa58b4aa3631" x="8" y="91" width="250" height="28"/>
+					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+						<datasetRun subDataset="dataset1" uuid="f53b2344-cec6-41b5-b237-9205b5171342">
+							<datasetParameter name="d_serial">
+								<datasetParameterExpression><![CDATA[$F{doc_serial}]]></datasetParameterExpression>
+							</datasetParameter>
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+						<jr:listContents height="28" width="250">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement uuid="810dccdb-06ef-4c35-a6eb-c1c14acd5321" isPrintRepeatedValues="false" x="0" y="0" width="250" height="28"/>
+								<box leftPadding="0">
+									<pen lineColor="#006666"/>
+									<topPen lineWidth="1.0" lineColor="#006666"/>
+									<leftPen lineWidth="1.0" lineColor="#006666"/>
+									<bottomPen lineWidth="1.0" lineColor="#006666"/>
+									<rightPen lineWidth="1.0" lineColor="#006666"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" size="12" isBold="false" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+							</textField>
+						</jr:listContents>
+					</jr:list>
+				</componentElement>
+				<staticText>
+					<reportElement uuid="127a2b50-08fc-4332-8dc5-bfb9762ef207" mode="Opaque" x="8" y="62" width="250" height="29" forecolor="#000000" backcolor="#E6E6E6"/>
+					<box leftPadding="0">
+						<pen lineColor="#006666"/>
+						<topPen lineWidth="1.0" lineColor="#006666"/>
+						<leftPen lineWidth="1.0" lineColor="#006666"/>
+						<bottomPen lineWidth="1.0" lineColor="#006666"/>
+						<rightPen lineWidth="1.0" lineColor="#006666"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="16" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Name]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement uuid="2ac4bbd2-f021-439e-aa64-0745cc929443" x="8" y="21" width="213" height="29" forecolor="#000000"/>
+					<box leftPadding="0">
+						<topPen lineWidth="0.0" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineColor="#000000"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="18" isBold="true" isItalic="true" isUnderline="true" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+						<paragraph rightIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["* Medical tests"]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<title>
+		<band height="154">
+			<staticText>
+				<reportElement uuid="199e4617-aa18-440d-9396-6e343416a549" x="8" y="91" width="54" height="20" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Patient :]]></text>
+			</staticText>
+			<textField pattern="MM/dd/yyyy">
+				<reportElement uuid="0f48f2a5-95fd-432e-9d2e-84de7a0eee2f" x="63" y="91" width="136" height="20" forecolor="#000000"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{patient_name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MM/dd/yyyy">
+				<reportElement uuid="5c6a3d43-f4bd-4e02-b612-9aca873e14f3" x="212" y="11" width="136" height="18" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["DR. " +$F{doc_name}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement uuid="f5266cfa-f8b9-489e-90cd-39041bac210e" x="387" y="103" width="168" height="29" forecolor="#FFFFFF" backcolor="#000000"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="true" checksumRequired="false">
+					<jr:codeExpression><![CDATA[$F{doc_serial}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<staticText>
+				<reportElement uuid="60c25422-6607-4329-bab8-0063df71c5bc" x="8" y="11" width="155" height="18" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Official Hours]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5af1faf7-7147-4565-96ee-14f998d95fed" x="8" y="29" width="155" height="15" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[11 A.M  To  2 P.M]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="55f84042-e2a2-4da7-952d-ec90ee21801c" x="8" y="44" width="155" height="15" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[And By Oppoinyment]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8f134d2b-619f-4169-9cff-9a43a1873b00" x="212" y="29" width="155" height="15" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[1100 A. Agamy ST, ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ad42c790-a2f3-483c-8d9b-053f3fbf1156" x="212" y="44" width="155" height="15" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Abu Youssef Ville S.C. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="567f7216-9b25-4b25-8243-aa23b4b6fd7e" x="399" y="29" width="155" height="15" forecolor="#000000"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mob: 01281515422]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="193d43b6-9568-49e8-94d1-7bee53b902f2" x="399" y="44" width="155" height="15" forecolor="#000000"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tel : 034147766]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="837cccbb-733f-47f8-b87a-4422e7864b74" x="399" y="11" width="155" height="18" forecolor="#000000"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TELEPHONES,]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="705e2a13-b856-4abb-84d6-751f6386583b" x="0" y="69" width="555" height="1" forecolor="#000000"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField pattern="MM/dd/yyyy">
+				<reportElement uuid="ea46a3c1-1917-4e35-b692-8fa5af2d7d76" x="63" y="111" width="136" height="20" forecolor="#000000"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{patient_dob}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="c903e467-fe17-4d5e-9e76-56d1ca5c3342" x="8" y="111" width="54" height="20" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[D.OB :]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="28">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="6be15ba9-071e-4ad8-9e8e-0501ed33fa99" x="468" y="0" width="75" height="28"/>
+				<box leftPadding="0">
+					<pen lineColor="#006666"/>
+					<topPen lineWidth="1.0" lineColor="#006666"/>
+					<leftPen lineWidth="1.0" lineColor="#006666"/>
+					<bottomPen lineWidth="1.0" lineColor="#006666"/>
+					<rightPen lineWidth="1.0" lineColor="#006666"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="false" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{drug_number}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="19091ec0-ae2a-4899-89b9-a68e5ab3082a" isPrintRepeatedValues="false" x="258" y="0" width="210" height="28"/>
+				<box leftPadding="0">
+					<pen lineColor="#006666"/>
+					<topPen lineWidth="1.0" lineColor="#006666"/>
+					<leftPen lineWidth="1.0" lineColor="#006666"/>
+					<bottomPen lineWidth="1.0" lineColor="#006666"/>
+					<rightPen lineWidth="1.0" lineColor="#006666"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="false" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{drug_type}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="36eb7af9-0c5f-4a68-bb82-87a26e06e80a" isPrintRepeatedValues="false" x="8" y="0" width="250" height="28"/>
+				<box leftPadding="0">
+					<pen lineColor="#006666"/>
+					<topPen lineWidth="1.0" lineColor="#006666"/>
+					<leftPen lineWidth="1.0" lineColor="#006666"/>
+					<bottomPen lineWidth="1.0" lineColor="#006666"/>
+					<rightPen lineWidth="1.0" lineColor="#006666"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="false" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{drug_name}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="60">
+			<textField pattern="MM/dd/yyyy">
+				<reportElement uuid="e561dabe-6de2-4eeb-913f-afdb609ce6ed" x="494" y="0" width="60" height="20" forecolor="#000000"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{doc_date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="82df7e58-d602-4db4-a1e8-d64285c41e18" x="452" y="0" width="42" height="20" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date :]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="8adbd093-eb34-41cb-95b1-bf4e2510e5fb" x="0" y="23" width="555" height="1" forecolor="#000000"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField pattern="MM/dd/yyyy">
+				<reportElement uuid="19089b48-3dac-45d3-bdb8-29149b4fec60" x="129" y="35" width="344" height="20" forecolor="#000000"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Dr. "+$F{patient_name}+" Clinic For Specialized medical consultations "]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
